@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayun</title>
+      <style>
+          #progress-bar-container {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 3px;
+              z-index: 1000;
+              background-color: #f0f0f0;
+          }
+          #progress-bar {
+              height: 100%;
+              width: 0%;
+              background-color: #000000; /* 或任何你喜欢的颜色 */
+              transition: width 0.4s ease;
+          }
+          #app {
+              opacity: 0;
+              position: relative;
+              transition: opacity .5s ease-in-out;
+          }
+          #animation-container {
+              position: fixed;
+              top: 0;
+              left: 0;
+              background-color: #fff;
+          }
+          .screen-dark {
+              background-color: #e3fe75;
+              position: fixed;
+              left: 0;
+              top: 0;
+              opacity: 0;
+              width: 100%;
+              display: flex;
+              font-size: 7.25rem;
+              font-weight: bold;
+              justify-content: center;
+              align-items: center;
+          }
+          .screen-light {
+              top: 0;
+              transition: top .5s ease-in-out;
+              height: 100vh;
+              left: 0;
+              position: fixed;
+              width: 100%;
+          }
+      </style>
+  </head>
+  <body>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    <div id="animation-container">
+        <div class="screen-dark">MyWebsite <br><span style="font-size: 2.25rem; position: absolute;right: 0;bottom: 0">by Ayun</span></div>
+        <div class="screen-light"></div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
