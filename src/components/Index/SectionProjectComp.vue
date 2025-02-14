@@ -88,13 +88,13 @@ const projectItem = [
     <div class="container">
       <div class="header">
         <h2>
-          <span class="text-stroke">My</span> Project
+          <span class="text-stroke">祝余</span> 软件
         </h2>
       </div>
       <div class="main">
         <div class="title">
-          <div class="left">Project Name</div>
-          <div class="right">Categories</div>
+          <div class="left">产品名称</div>
+          <div class="right">类别</div>
         </div>
         <router-link to="/" class="items" v-for="item in projectItem" :key="item.id">
           <div class="item">
@@ -116,12 +116,12 @@ const projectItem = [
         <div class="btn-group">
           <div class="btn-1">
             <router-link to="/">
-              <span>Start you project</span>
+              <span>申请免费试用</span>
             </router-link>
           </div>
           <div class="btn-2">
             <router-link to="/">
-              <span>View our work</span>
+              <span>告知我们您的需求</span>
             </router-link>
           </div>
         </div>
@@ -132,226 +132,720 @@ const projectItem = [
 </template>
 
 <style scoped lang="less">
-.section-projects {
-  width: 100%;
-  background-color: #000000;
-  display: flex;
-  justify-content: center;
+/* Styles for PC */
+@media screen and (min-width: 1024px) {
+  .section-projects {
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
 
-  .container {
-    width: 79%;
-    height: 100%;
-    .header {
-      padding-top: 80px;
-      width: 100%;
-      h2 {
-        font-size: 3.75rem;
-        color: #FFFFFF;
-      }
-      .text-stroke {
-        -webkit-text-stroke: 2px #FFFFFF; /* Safari 和 Chrome */
-        color: transparent; /* 将文字颜色设置为透明，以使描边效果显现 */
-      }
-    }
-    .main {
-      width: 100%;
-      .title {
+    .container {
+      width: 79%;
+      height: 100%;
+
+      .header {
+        padding-top: 80px;
         width: 100%;
-        height: 50px;
-        display: flex;
-        color: #9CA3AFFF;
-        border-bottom: 1px solid #FFFFFF;
-        font-weight: bold;
-        font-size: 1.25rem;
 
-        .left {
-          width: 40%;
-          height: 100%;
-          display: flex;
-          align-items: center;
+        h2 {
+          font-size: 3.75rem;
+          color: #FFFFFF;
         }
-        .right {
-          width: 60%;
-          height: 100%;
-          display: flex;
-          align-items: center;
+
+        .text-stroke {
+          -webkit-text-stroke: 2px #FFFFFF; /* Safari 和 Chrome */
+          color: transparent; /* 将文字颜色设置为透明，以使描边效果显现 */
         }
       }
-      .items {
-        height: 78px;
+
+      .main {
         width: 100%;
-        display: inline-block;
-        font-size: 20px;
-        border-bottom: 1px solid #FFFFFF;
-        .item {
+
+        .title {
           width: 100%;
-          height: 100%;
+          height: 50px;
           display: flex;
-          position: relative;
-          line-height: 100px;
-          text-align: center;
-          overflow: hidden;
+          color: #9CA3AFFF;
+          border-bottom: 1px solid #FFFFFF;
+          font-weight: bold;
+          font-size: 1.25rem;
 
           .left {
             width: 40%;
             height: 100%;
             display: flex;
             align-items: center;
-            font-weight: bold;
-            color: #FFFFFF;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.2s ease;
           }
+
           .right {
-            width: 55%;
+            width: 60%;
             height: 100%;
             display: flex;
             align-items: center;
-            color: black;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.2s ease;
-            ul {
-              display: flex;
-              width: 92%;
-              padding: 0;
-              li {
-                padding: 0 10px;
-                list-style-type: none;
-                height: 25px;
-                font-size: 12px;
-                margin: 0 5px;
-                background-color: #fff;
-                border-radius: 50px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+          }
+        }
 
+        .items {
+          height: 78px;
+          width: 100%;
+          display: inline-block;
+          font-size: 20px;
+          border-bottom: 1px solid #FFFFFF;
+
+          .item {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            line-height: 100px;
+            text-align: center;
+            overflow: hidden;
+
+            .left {
+              width: 40%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              font-weight: bold;
+              color: #FFFFFF;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+            }
+
+            .right {
+              width: 55%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              color: black;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+
+              ul {
+                display: flex;
+                width: 92%;
+                padding: 0;
+
+                li {
+                  padding: 0 10px;
+                  list-style-type: none;
+                  height: 25px;
+                  font-size: 12px;
+                  margin: 0 5px;
+                  background-color: #fff;
+                  border-radius: 50px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                }
+              }
+            }
+
+            .svg {
+              width: 5%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+              z-index: 2;
+
+              svg {
+                fill: #FFFFFF;
               }
             }
           }
-          .svg {
-            width: 5%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            svg {
-              fill: #FFFFFF;
-            }
-          }
-        }
-        @keyframes floatAnimation {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
 
-        .item:hover {
-          .left {
-            color: black;
-            transform: translateX(20px);
-          }
-          .right {
-            transform: translateX(20px);
-            li {
-              background-color: #E3FE75FF;
+          @keyframes floatAnimation {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px);
             }
           }
-          .svg {
-            svg {
-              fill: black;
-              animation: floatAnimation 2s ease-in-out infinite;
+
+          .item:hover {
+            .left {
+              color: black;
+              transform: translateX(20px);
+            }
+
+            .right {
+              transform: translateX(20px);
+
+              li {
+                background-color: #E3FE75FF;
+              }
+            }
+
+            .svg {
+              svg {
+                fill: black;
+                animation: floatAnimation 2s ease-in-out infinite;
+              }
             }
           }
-        }
-        .item::before {
-          content: "";
-          position: absolute;
-          top: 100%; /* 开始时隐藏在元素下方 */
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: #FFFFFF; /* 悬停时的背景色 */
-          transition: top 0.2s ease; /* 过渡动画 */
-          z-index: 1;
-        }
-        .item:hover::before {
-          top: 0; /* 悬停时背景色填充至顶部 */
+
+          .item::before {
+            content: "";
+            position: absolute;
+            top: 100%; /* 开始时隐藏在元素下方 */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; /* 悬停时的背景色 */
+            transition: top 0.2s ease; /* 过渡动画 */
+            z-index: 1;
+          }
+
+          .item:hover::before {
+            top: 0; /* 悬停时背景色填充至顶部 */
+          }
         }
       }
-    }
-    .footer {
-      margin-top: 50px;
-      margin-bottom: 100px;
-      .btn-group {
-        margin: 20px 0;
-        height: 65px;
-        width: 40%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
-        .btn-1 {
-          width: 45%;
-          height: 100%;
+      .footer {
+        margin-top: 50px;
+        margin-bottom: 100px;
+
+        .btn-group {
+          margin: 20px 0;
+          height: 65px;
+          width: 40%;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-          border: 2px solid #759201FF;
-          background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
-          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
-          transition: background-position 0.2s; /* 过渡背景位置 */
-          a {
-            color: #000;
-            font-size: 18px;
-            font-weight: bold;
-            width: 100%;
+
+          .btn-1 {
+            width: 45%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 2px solid #759201FF;
+            background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+
+            a {
+              color: #000;
+              font-size: 18px;
+              font-weight: bold;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
-        }
-        .btn-1:hover {
-          background-position: -100% 0;
-          //color: #759201FF;
-          a {
-            color: #FFFFFF;
+
+          .btn-1:hover {
+            background-position: -100% 0;
+            //color: #759201FF;
+            a {
+              color: #FFFFFF;
+            }
           }
-        }
-        .btn-2 {
-          width: 45%;
-          height: 100%;
-          border: 2px solid #FFFFFF;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
-          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
-          transition: background-position 0.2s; /* 过渡背景位置 */
-          a {
+
+          .btn-2 {
+            width: 45%;
             height: 100%;
-            width: 100%;
-            color: #FFFFFF;
-            font-weight: bold;
-            font-size: 18px;
+            border: 2px solid #FFFFFF;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+
+            a {
+              height: 100%;
+              width: 100%;
+              color: #FFFFFF;
+              font-weight: bold;
+              font-size: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
-        }
-        .btn-2:hover {
-          background-position: -100% 0;
-          a {
-            color: #000000;
+
+          .btn-2:hover {
+            background-position: -100% 0;
+
+            a {
+              color: #000000;
+            }
           }
         }
       }
     }
   }
+
 }
+/* Styles for tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .section-projects {
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+
+    .container {
+      width: 79%;
+      height: 100%;
+      .header {
+        padding-top: 50px;
+        width: 100%;
+        h2 {
+          font-size: 2.75rem;
+          color: #FFFFFF;
+        }
+        .text-stroke {
+          -webkit-text-stroke: 2px #FFFFFF; /* Safari 和 Chrome */
+          color: transparent; /* 将文字颜色设置为透明，以使描边效果显现 */
+        }
+      }
+      .main {
+        width: 100%;
+        .title {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          color: #9CA3AFFF;
+          border-bottom: 1px solid #FFFFFF;
+          font-weight: bold;
+          font-size: 1.25rem;
+
+          .left {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
+          .right {
+            width: 65%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .items {
+          height: 78px;
+          width: 100%;
+          display: inline-block;
+          font-size: 20px;
+          border-bottom: 1px solid #FFFFFF;
+          .item {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            line-height: 100px;
+            text-align: center;
+            overflow: hidden;
+
+            .left {
+              width: 35%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              font-weight: bold;
+              color: #FFFFFF;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+              font-size: 1rem;
+            }
+            .right {
+              width: 65%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              color: black;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+              ul {
+                display: flex;
+                width: 92%;
+                padding: 0;
+                li {
+                  padding: 0 10px;
+                  list-style-type: none;
+                  height: 25px;
+                  font-size: 12px;
+                  margin: 0 5px;
+                  background-color: #fff;
+                  border-radius: 50px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                }
+              }
+            }
+            .svg {
+              width: 5%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+              z-index: 2;
+              svg {
+                fill: #FFFFFF;
+              }
+            }
+          }
+          @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+
+          .item:hover {
+            .left {
+              color: black;
+              transform: translateX(20px);
+            }
+            .right {
+              transform: translateX(20px);
+              li {
+                background-color: #E3FE75FF;
+              }
+            }
+            .svg {
+              svg {
+                fill: black;
+                animation: floatAnimation 2s ease-in-out infinite;
+              }
+            }
+          }
+          .item::before {
+            content: "";
+            position: absolute;
+            top: 100%; /* 开始时隐藏在元素下方 */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; /* 悬停时的背景色 */
+            transition: top 0.2s ease; /* 过渡动画 */
+            z-index: 1;
+          }
+          .item:hover::before {
+            top: 0; /* 悬停时背景色填充至顶部 */
+          }
+        }
+      }
+      .footer {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        .btn-group {
+          margin: 20px 0;
+          height: 40px;
+          width: 55%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .btn-1 {
+            width: 45%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #759201FF;
+            background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+            a {
+              color: #000;
+              font-size: 18px;
+              font-weight: bold;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          .btn-1:hover {
+            background-position: -100% 0;
+            //color: #759201FF;
+            a {
+              color: #FFFFFF;
+            }
+          }
+          .btn-2 {
+            width: 45%;
+            height: 100%;
+            border: 2px solid #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+            a {
+              height: 100%;
+              width: 100%;
+              color: #FFFFFF;
+              font-weight: bold;
+              font-size: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          .btn-2:hover {
+            background-position: -100% 0;
+            a {
+              color: #000000;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+/* Styles for mobile phones */
+@media screen and (max-width: 767px) {
+  .section-projects {
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+
+    .container {
+      width: 79%;
+      height: 100%;
+      .header {
+        padding-top: 50px;
+        width: 100%;
+        h2 {
+          font-size: 1.75rem;
+          color: #FFFFFF;
+        }
+        .text-stroke {
+          -webkit-text-stroke: 2px #FFFFFF; /* Safari 和 Chrome */
+          color: transparent; /* 将文字颜色设置为透明，以使描边效果显现 */
+        }
+      }
+      .main {
+        width: 100%;
+        .title {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          color: #9CA3AFFF;
+          border-bottom: 1px solid #FFFFFF;
+          font-weight: bold;
+          font-size: 0.85rem;
+
+          .left {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
+          .right {
+            width: 65%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .items {
+          height: 78px;
+          width: 100%;
+          display: inline-block;
+          font-size: 20px;
+          border-bottom: 1px solid #FFFFFF;
+          .item {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            line-height: 100px;
+            text-align: center;
+            overflow: hidden;
+
+            .left {
+              width: 45%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              font-weight: bold;
+              color: #FFFFFF;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+              font-size: 0.8rem;
+            }
+            .right {
+              width: 55%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              color: black;
+              position: relative;
+              z-index: 2;
+              transition: transform 0.2s ease;
+              ul {
+                display: flex;
+                width: 92%;
+                padding: 0;
+                flex-direction: column;
+                overflow-y: auto;
+                scrollbar-width: none; /* 对于Firefox */
+                -ms-overflow-style: none; /* 对于IE和Edge */
+                height: 90%;
+                li {
+                  padding: 3px 10px;
+                  list-style-type: none;
+                  height: 25px;
+                  font-size: 8px;
+                  margin: 2px 5px;
+                  background-color: #fff;
+                  border-radius: 50px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                }
+              }
+            }
+            .svg {
+              width: 5%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+              z-index: 2;
+              svg {
+                fill: #FFFFFF;
+              }
+            }
+          }
+          @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+
+          .item:hover {
+            .left {
+              color: black;
+              transform: translateX(20px);
+            }
+            .right {
+              transform: translateX(20px);
+              li {
+                background-color: #E3FE75FF;
+              }
+            }
+            .svg {
+              svg {
+                fill: black;
+                animation: floatAnimation 2s ease-in-out infinite;
+              }
+            }
+          }
+          .item::before {
+            content: "";
+            position: absolute;
+            top: 100%; /* 开始时隐藏在元素下方 */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; /* 悬停时的背景色 */
+            transition: top 0.2s ease; /* 过渡动画 */
+            z-index: 1;
+          }
+          .item:hover::before {
+            top: 0; /* 悬停时背景色填充至顶部 */
+          }
+        }
+      }
+      .footer {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        .btn-group {
+          margin: 20px 0;
+          height: 40px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .btn-1 {
+            width: 45%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #759201FF;
+            background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+            a {
+              color: #000;
+              font-size: 14px;
+              font-weight: bold;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          .btn-1:hover {
+            background-position: -100% 0;
+            //color: #759201FF;
+            a {
+              color: #FFFFFF;
+            }
+          }
+          .btn-2 {
+            width: 45%;
+            height: 100%;
+            border: 2px solid #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+            background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+            transition: background-position 0.2s; /* 过渡背景位置 */
+            a {
+              height: 100%;
+              width: 100%;
+              color: #FFFFFF;
+              font-weight: bold;
+              font-size: 14px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          .btn-2:hover {
+            background-position: -100% 0;
+            a {
+              color: #000000;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
 
 </style>

@@ -8,7 +8,7 @@ const app = createApp(App)
 app.use(router);
 app.mount('#app');
 
-const updateProgressBar = (percentage)=> {
+const updateProgressBar = (percentage: any)=> {
     window.scrollTo(0,0);
     const progressBar = document.getElementById('progress-bar');
     if (progressBar) {
@@ -27,9 +27,9 @@ const animation =  () => {
         duration: 1000,
         direction: 'normal',
         complete: () => {
-            const vueDom = document.getElementById("app");
-            vueDom.style.opacity = 1;
-            document.getElementById('animation-container').style.display = 'none';
+            const vueDom:HTMLElement | null  = document.getElementById("app")!;
+            vueDom.style.opacity = "1";
+            document.getElementById('animation-container')!.style.display = 'none';
             document.body.style.backgroundColor = '#000000';
         }
     });
@@ -53,7 +53,7 @@ const interval = setInterval(() => {
     if (progress >= 100) {
         clearInterval(interval);
         // 加载完成后隐藏进度条
-        document.getElementById('progress-bar-container').style.display = 'none';
+        document.getElementById('progress-bar-container')!.style.display = 'none';
         animation()
 
 

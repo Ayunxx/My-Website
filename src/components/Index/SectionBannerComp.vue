@@ -3,38 +3,43 @@ import anime from "animejs";
 import opentype from "opentype.js";
 import {nextTick, onMounted, ref} from "vue";
 
-const svgPaths = ref([]);
-const fontSize = 120; // 字体大小
-const spacing = 20; // 两个文本之间的间距
-const texts = ['Welcome', 'To', 'My', "Website"]; // 要生成路径的文本数组
+const svgPaths = ref<string[]>([]);
+let fontSize = 120; // 字体大小
+let spacing = 20; // 两个文本之间的间距
+const texts = ['祝','余','工','作','室']; // 要生成路径的文本数组
 const y = 100; // 假设所有文本都在同一基线上
-let x = 0; // 初始x坐标
+let x = ref(0); // 改为响应式变量
 
 const loadFontAndGeneratePath = () => {
-  opentype.load('src/assets/font/AlimamaDongFangDaKai-Regular.ttf', (err, font) => {
-    if (err) {
-      console.error('Font could not be loaded:', err);
-    } else {
-      texts.forEach(text => {
-        // 生成当前文本的路径
-        const path = font.getPath(text, x, y, fontSize);
-        svgPaths.value.push(path.toPathData())
-        // 更新x坐标，为下一个文本计算位置
-        x += font.getAdvanceWidth(text, fontSize, { kerning: true }) + spacing;
-      })
-      nextTick(()=> {
-        animatePathDrawing();
-      })
-    }
+  if (window.innerWidth <= 800) {
+    fontSize = 60
+  }
+  opentype.load('/font/AlimamaDongFangDaKai-Regular.ttf', (err, font) => {
+    if (err || !font) return console.error('Font load error:', err);
+
+    // 计算总宽度
+    const totalWidth = texts.reduce((acc, text) =>
+        acc + font.getAdvanceWidth(text, fontSize) + spacing, 0) - spacing;
+
+    // 设置起始x坐标为视窗中间减去总宽一半
+    x.value = window.innerWidth/2 - totalWidth/2;
+
+    texts.forEach(text => {
+      const path = font.getPath(text, x.value, y, fontSize);
+      svgPaths.value.push(path.toPathData(2));
+      x.value += font.getAdvanceWidth(text, fontSize) + spacing;
+    });
+
+    nextTick(animatePathDrawing);
   });
 };
 const animatePathDrawing = () => {
   anime({
-    targets: '.line-drawing0, .line-drawing1, .line-drawing2, .line-drawing3',
+    targets: '.line-drawing0, .line-drawing1, .line-drawing2, .line-drawing3,.line-drawing4',
     strokeDashoffset: [anime.setDashoffset, 0],
     easing: 'easeInOutSine',
     duration: 2500,
-    delay: function(el, i) { return i * 250 },
+    delay: (_, i) => i * 250,
     direction: 'alternate',
     loop: true
   });
@@ -57,24 +62,24 @@ onMounted(() => {
 <template>
   <div class="section-banner">
     <div class="svg-container">
-      <svg width="70%" height="50%">
+      <svg width="100%" height="50%">
         <g v-for="(pathData, index) in svgPaths" :key="index">
           <path :class="`line-drawing${index}`" :d="pathData" fill="none" stroke="#6B47B1FF" stroke-width="2"/>
         </g>
       </svg>
     </div>
     <div class="container">
-      <h1>A Creative & Technology Company in Malaysia</h1>
-      <p>We build innovative digital solutions for decade.</p>
+      <h1>欢迎访问祝余工作室！</h1>
+<!--      <p>我们成立于2025年</p>-->
       <div class="btn-group">
         <div class="btn-1">
           <router-link to="/">
-            <span>Start you project</span>
+            <span>了解更多</span>
           </router-link>
         </div>
         <div class="btn-2">
           <router-link to="/">
-            <span>View our work</span>
+            <span>联系我们</span>
           </router-link>
         </div>
       </div>
@@ -89,99 +94,301 @@ onMounted(() => {
 </template>
 
 <style scoped lang="less">
-.section-banner {
-  height: 800px;
-  .svg-container {
-    background-color: #000000;
-    z-index: -1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 450px;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #FFFFFF;
-    font-size: 1.2rem;
-    p {
-      font-size: 1.5rem;
-    }
-    .btn-group {
-      margin: 20px 0;
-      height: 65px;
-      width: 30%;
+@media screen and (min-width: 1024px) {
+  .section-banner {
+    height: 800px;
+    .svg-container {
+      background-color: #000000;
+      z-index: -1;
+      position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      height: 450px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      p {
+        font-size: 1.5rem;
+      }
+      .btn-group {
+        margin: 20px 0;
+        height: 65px;
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-      .btn-1 {
-        width: 45%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px solid #759201FF;
-        background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
-        background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
-        transition: background-position 0.2s; /* 过渡背景位置 */
-        a {
-          color: #000;
-          font-size: 18px;
-          font-weight: bold;
-          width: 100%;
+        .btn-1 {
+          width: 45%;
           height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
+          border: 2px solid #759201FF;
+          background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
-      }
-      .btn-1:hover {
-        background-position: -100% 0;
-        //color: #759201FF;
-        a {
-          color: #FFFFFF;
+        .btn-1:hover {
+          background-position: -100% 0;
+          //color: #759201FF;
+          a {
+            color: #FFFFFF;
+          }
         }
-      }
-      .btn-2 {
-        width: 45%;
-        height: 100%;
-        border: 2px solid #FFFFFF;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
-        background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
-        transition: background-position 0.2s; /* 过渡背景位置 */
-        a {
+        .btn-2 {
+          width: 45%;
           height: 100%;
-          width: 100%;
-          color: #FFFFFF;
-          font-weight: bold;
-          font-size: 18px;
+          border: 2px solid #FFFFFF;
           display: flex;
           justify-content: center;
           align-items: center;
+          background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            height: 100%;
+            width: 100%;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .btn-2:hover {
+          background-position: -100% 0;
+          a {
+            color: #000000;
+          }
         }
       }
-      .btn-2:hover {
-        background-position: -100% 0;
-        a {
-          color: #000000;
-        }
+      .btn-svg {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: none; /* 如果需要，可以移除按钮点击后的焦点样式 */
       }
     }
-    .btn-svg {
-      background-color: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-      font: inherit;
-      cursor: pointer;
-      outline: none; /* 如果需要，可以移除按钮点击后的焦点样式 */
+  }
+}
+
+/* Styles for tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .section-banner {
+    height: 800px;
+    .svg-container {
+      background-color: #000000;
+      z-index: -1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 450px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #FFFFFF;
+      font-size: 0.8rem;
+      p {
+        font-size: 1.2rem;
+      }
+      .btn-group {
+        margin: 20px 0;
+        height: 35px;
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .btn-1 {
+          width: 45%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid #759201FF;
+          background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .btn-1:hover {
+          background-position: -100% 0;
+          //color: #759201FF;
+          a {
+            color: #FFFFFF;
+          }
+        }
+        .btn-2 {
+          width: 45%;
+          height: 100%;
+          border: 2px solid #FFFFFF;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            height: 100%;
+            width: 100%;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .btn-2:hover {
+          background-position: -100% 0;
+          a {
+            color: #000000;
+          }
+        }
+      }
+      .btn-svg {
+        margin-top: 20px;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: none; /* 如果需要，可以移除按钮点击后的焦点样式 */
+      }
+    }
+  }
+}
+
+/* Styles for mobile phones */
+@media screen and (max-width: 767px) {
+  .section-banner {
+    height: 800px;
+    .svg-container {
+      background-color: #000000;
+      z-index: -1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 450px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #FFFFFF;
+      font-size: 0.5rem;
+      p {
+        font-size: 0.8rem;
+      }
+      .btn-group {
+        margin: 20px 0;
+        height: 40px;
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .btn-1 {
+          width: 45%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid #759201FF;
+          background: linear-gradient(to right, #E3FE75FF 0%, #E3FE75FF 50%, #759201FF 50%, #759201FF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .btn-1:hover {
+          background-position: -100% 0;
+          //color: #759201FF;
+          a {
+            color: #FFFFFF;
+          }
+        }
+        .btn-2 {
+          width: 45%;
+          height: 100%;
+          border: 2px solid #FFFFFF;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(to right, #000000 0%, #000000 50%, #FFFFFF 50%, #FFFFFF 100%);
+          background-size: 200% 100%; /* 两倍的宽度，用于实现从左到右的填充效果 */
+          transition: background-position 0.2s; /* 过渡背景位置 */
+          a {
+            height: 100%;
+            width: 100%;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .btn-2:hover {
+          background-position: -100% 0;
+          a {
+            color: #000000;
+          }
+        }
+      }
+      .btn-svg {
+        margin-top: 20px;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: none; /* 如果需要，可以移除按钮点击后的焦点样式 */
+      }
     }
   }
 }

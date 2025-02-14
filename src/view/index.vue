@@ -31,11 +31,26 @@ import SectionBannerComp from "@/components/Index/SectionBannerComp.vue";
 </template>
 
 <style scoped lang="less">
-
-main {
-  margin-top: 120px;
+/* Styles for PC */
+@media screen and (min-width: 1024px) {
+  main {
+    margin-top: 120px;
+  }
 }
 
+/* Styles for tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  main {
+    margin-top: 65px;
+  }
+}
+
+/* Styles for mobile phones */
+@media screen and (max-width: 767px) {
+  main {
+    margin-top: 65px;
+  }
+}
 
 
 </style>
